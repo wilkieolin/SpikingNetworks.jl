@@ -1,0 +1,18 @@
+name = "SpikingNetworks"
+uuid = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+authors = ["SpikingNetworks Team <example@spikingnetworks.io>"]
+version = "0.1.0"
+
+[deps]
+DifferentialEquations = "0b1ec98e-14e9-456f-8b4e-7b8e8a3a2a7e"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
+KernelAbstractions = "63c18a36-062a-441e-b654-da1e3ab784c6"
+ChainRulesCore = "08244794-96d8-4a5e-8d28-627e8f59b2d6"
+Zygote = "e88e6eb3-aa80-5325-afca-941959d7151f"
+
+[compat]
+julia = "1.11"
+DifferentialEquations = "7.14"
+CUDA = "5.4"
