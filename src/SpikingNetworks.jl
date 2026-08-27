@@ -4,19 +4,23 @@ using DifferentialEquations
 using LinearAlgebra
 using Random
 
-export SpikeTrain, SpikeTrainGPU, SpikingArgs,
+export SpikeTrain, SpikeTrainGPU,
        SpikingCall, CurrentCall, LocalCurrent,
-       oscillator_bank, spike_current,
-       detect_spike_protocol, NeuronModel,
-       phase_to_train, solution_to_train,
+       random_spike_train,
+       SpikingArgs, neuron_bank, spike_current,
+       SpikeKernel, DeltaKernel, GaussianKernel,
+       RaisedCosineKernel, AlphaKernel, FunctionKernel,
+       support, resolve_kernel,
        find_spikes_ref, AbstractNeuronModel,
        GenericNeuronModel, simulate_network,
        update_equation!, detect_spike,
-       IntegrateAndFire
+       IntegrateAndFire, CurrentGenerator,
+       SpikeRecorder, reset_callback, poisson_spike_train
 
-include("types.jl")
-include("spiking.jl")
+include("kernels.jl")
 include("models.jl")
+include("spiketrain_types.jl")
+include("spiking.jl")
 include("demo_iaf.jl")
 
 end

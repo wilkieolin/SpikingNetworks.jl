@@ -7,6 +7,28 @@ User defines:
 
 abstract type AbstractNeuronModel end
 
+struct SpikingArgs
+    leakage::Float32
+    t_period::Float32
+    t_window::Float32
+    spk_scale::Float32
+    steepness::Float32
+    threshold::Float32
+    spike_kernel::Union{Symbol, Function, SpikeKernel}
+    solver
+    solver_args::Dict
+    warmup_periods::Int
+end
+
+function SpikingArgs(; leakage::Real=-0.2f0, t_period::Real=1.0f0, t_window::Real=0.01f0,
+                      spk_scale::Real=1.0f0, steepness::Real=0.05f0, threshold::Real=0.001f0,
+                      spike_kernel=:gaussian, solver=Tsit5(),
+                      solver_args=Dict(:dt=>0.01f0, :adaptive=>false),
+                      warmup_periods::Integer=0)
+    SpikingArgs(Float32(leakage), Float32(t_period), Float32(t_window), Float32(spk_scale),
+                Float32(steepness), Float32(threshold), spike_kernel, solver, solver_args, Int(warmup_periods))
+end
+
 # Protocol: user must implement for their model
 function update_equation!(dz, z, I, t, params, model::AbstractNeuronModel; connections=nothing)
     error("update_equation! not implemented for $(typeof(model)). " *
@@ -43,6 +65,7 @@ function simulate_network(model::AbstractNeuronModel,
                            input_current::Function,
                            tspan::Tuple{Float32, Float32};
                            connections=nothing,
+                           callback=nothing,
                            spike_args::SpikingArgs=SpikingArgs())
     function dzdt(z, p, t)
         I = input_current(t)
@@ -50,5 +73,5 @@ function simulate_network(model::AbstractNeuronModel,
         update_equation!(dz, z, I, t, p, model; connections=connections)
         return dz
     end
-    return oscillator_bank(z0, dzdt, model; tspan=tspan, spk_args=spike_args)
+    return neuron_bank(z0, dzdt, model; tspan=tspan, spk_args=spike_args, callback=callback)
 end
