@@ -1,13 +1,15 @@
 name = "SpikingNetworks"
 uuid = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-authors = ["SpikingNetworks Team <example@spikingnetworks.io>"]
 version = "0.1.0"
+authors = ["SpikingNetworks Team <example@spikingnetworks.io>"]
 
 [deps]
 DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
-julia = "1.11"
 DifferentialEquations = "8"
+Random = "1.11.0"
+julia = "1.11"
