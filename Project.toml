@@ -7,6 +7,7 @@ version = "0.1.0"
 DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
+Random = "9a3f8284-a2c8-5f04-b4ea-6b825d080f56"
 
 [compat]
 julia = "1.11"
