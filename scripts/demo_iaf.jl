@@ -1,6 +1,7 @@
 using Pkg
-# Use parent project environment that has dependencies installed
-Pkg.activate("/home/wilkie/code/PhasorNetworks.jl")
+# Use local project environment
+Pkg.activate("/app")
+push!(LOAD_PATH, "/app/src")
 
 using SpikingNetworks
 using Random

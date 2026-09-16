@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  spiking-networks:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spiking-networks
+    volumes:
+      - ./src:/app/src
+      - ./scripts:/app/scripts
+      - ./notebooks:/app/notebooks
+      - ./Project.toml:/app/Project.toml
+    ports:
+      - "8888:8888"
+    environment:
+      - JULIA_NUM_THREADS=auto
+    command: script
+
+  # Alternative: GPU-enabled service (requires NVIDIA Container Toolkit)
+  spiking-networks-gpu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: spiking-networks-gpu
+    volumes:
+      - ./src:/app/src
+      - ./scripts:/app/scripts
+      - ./notebooks:/app/notebooks
+      - ./Project.toml:/app/Project.toml
+    ports:
+      - "8889:8888"
+    environment:
+      - JULIA_NUM_THREADS=auto
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    command: script
+    profiles:
+      - gpu
