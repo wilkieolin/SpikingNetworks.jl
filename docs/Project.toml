@@ -1,0 +1,10 @@
+name = "SpikingNetworksDocs"
+uuid = "c276b42c-8a64-4d5b-9c44-87e8d8d3c332"
+version = "0.1.0"
+authors = ["SpikingNetworks Team"]
+
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Literate = "98b081ad-f1c9-55d3-8b20-4c87d4299306"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+SpikingNetworks = "b91f53f2-56b8-4b57-a663-1cfe762e79e0"

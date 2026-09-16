@@ -1,0 +1,46 @@
+name: Documentation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: "1.11"
+
+      - name: Cache Julia packages
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-julia-docs
+        with:
+          path: |
+            ~/.julia
+            docs/.julia
+          key: ${{ runner.os }}-docs-${{ hashFiles('docs/Project.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-docs-
+
+      - name: Install dependencies
+        run: |
+          julia --project=docs -e 'using Pkg; Pkg.instantiate()'
+
+      - name: Build documentation
+        run: |
+          julia --project=docs docs/make.jl
+
+      - name: Check for broken links
+        run: |
+          julia --project=docs -e '
+            using Documenter
+            Documenter.checkdocs(joinpath(@__DIR__, "..", "docs", "build"))
+          '
