@@ -38,6 +38,7 @@ sol = simulate_network(model, z0, I_fn, (0f0, 10f0); connections=W)
 - [Tutorial: Integrate-and-Fire Network](@ref) — Interactive demo with kernel comparison
 - [Custom Neuron Models](@ref) — Protocol walkthrough for defining new models
 - [Callbacks & Recording](@ref) — Spike recording, reset callbacks, current generators
+- [Superconducting Transponder Neuron Models](@ref) — Simplified, FullPhysics, and Resonate-and-Fire variants
 - [API Reference](@ref) — Complete function/type reference
 
 ## Demos
