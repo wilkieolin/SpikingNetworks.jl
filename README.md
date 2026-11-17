@@ -1,5 +1,24 @@
 # SpikingNetworks.jl
 
+> **Retired (2026-11-17).** Not maintained; kept read-only for reference.
+> Device-level spiking simulation now lives in **PhasorNetworks.jl**
+> (`src/devices.jl`, `src/device_sheet.jl`, `src/device_reservoir.jl`, branch `spcnc`):
+>
+> - `NTronTransponder` — port of the spcnc reference transponder
+>   (gitlab.com/spcnc/transponder_model `toy_example.py`), validated click-for-click
+>   against the seven toy networks of transponder_model's CI.
+> - `RFTransponder` — resonate-and-fire LC cell.
+> - `DeviceReservoir` / `random_reservoir` — arbitrary/random graphs of real per-link
+>   delay lines, one KernelAbstractions engine for CPU and GPU; `DeviceSheet` for 2-D lattices.
+>
+> Why retired: measured 2026-10-15, the transponder models here do not work as
+> simulators — the R&F cell never enters refractory (`ref_timer` is set on a local,
+> not on `dz`), coupling never delivers a pulse (emission is gated on an integrated
+> state equalling `t` to 1e-12), the integrate-and-fire cell ignores its input, all
+> three mutate model state inside the ODE right-hand side, the R&F Q uses the
+> parallel formula on a series tank, and `FullPhysicsTransponder`'s wiring and bias
+> voltages differ from the Python LTspice replica it was ported from. There is no GPU path.
+
 Standalone Julia package for simulating networks of arbitrary spiking neurons.
 
 Forked from `PhasorNetworks.jl` — breaks off spiking dynamics from the Resonate-and-Fire / phase-SSM bridge. No Lux, no VSA, no phase-locked SSM.
